@@ -43,8 +43,9 @@ namespace Api.Controllers
 
         // DELETE api/<PrestamosController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public bool Delete(int id)
         {
+            return PrestamoBLL.Eliminar(id);
         }
     }
 }
