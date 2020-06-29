@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrestamosApp", "PrestamosApp.csproj", "{BA0A6FA6-D181-40F8-A94B-9A4394043E44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "..\Api\Api.csproj", "{169FA393-4B09-4483-A075-B93947C77151}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA0A6FA6-D181-40F8-A94B-9A4394043E44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0A6FA6-D181-40F8-A94B-9A4394043E44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0A6FA6-D181-40F8-A94B-9A4394043E44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0A6FA6-D181-40F8-A94B-9A4394043E44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{169FA393-4B09-4483-A075-B93947C77151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{169FA393-4B09-4483-A075-B93947C77151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{169FA393-4B09-4483-A075-B93947C77151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{169FA393-4B09-4483-A075-B93947C77151}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B5C7C77-ED2F-4802-AE73-094C6818D421}
+	EndGlobalSection
+EndGlobal

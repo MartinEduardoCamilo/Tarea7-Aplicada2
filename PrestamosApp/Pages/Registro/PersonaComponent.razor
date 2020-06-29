@@ -1,0 +1,150 @@
+﻿@page "/Persona"
+@page "/Persona/{PersonaId:int}"
+@using PrestamosApp.BLL
+@using PrestamosApp.Models
+
+@inject IToastService toast
+
+<EditForm Model="persona" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3>Registro de Personas</h3>
+
+        </div>
+
+        <div class="card-body">
+            <form>
+                <div class="form-row align-items-center">
+                    <div class="col">
+                        <div class="form-group">
+                            <label>ID:</label>
+                            <div class="input-group">
+                                <InputNumber @bind-Value="persona.PersonaId" class="form-control col-4" />
+                                <ValidationMessage For="(() => persona.PersonaId)"></ValidationMessage>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary" @onclick="Buscar"> <span class="fa fa-search"></span>  Buscar </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*Nombres*@
+                <div class="form-group">
+                    <label>NOMBRE:</label>
+                    <InputText @bind-Value="persona.Nombre" class="form-control" />
+                    <ValidationMessage For="@(() => persona.Nombre)" />
+                </div>
+                @*Telefono*@
+                <div class="form-group">
+                    <label>TELÉFONO:</label>
+                    <InputText @bind-Value="persona.Telefono" class="form-control" />
+                    <ValidationMessage For="@(() => persona.Telefono)" />
+                </div>
+                @*Cedula*@
+                <div class="form-group">
+                    <label>CÉDULA:</label>
+                    <InputText @bind-Value="persona.Cedula" class="form-control" />
+                    <ValidationMessage For="@(() => persona.Cedula)" />
+                </div>
+                @*Direccion*@
+                <div class="form-group">
+                    <label>DIRECCIÓN:</label>
+                    <InputText @bind-Value="persona.Direccion" class="form-control" />
+                    <ValidationMessage For="@(() => persona.Direccion)" />
+                </div>
+                @*Fecha*@
+                <div class="form-group">
+                    <label>FECHA:</label>
+                    <InputDate @bind-Value="persona.Fecha" class="form-control" />
+                    <ValidationMessage For="@(() => persona.Fecha)" />
+                </div>
+                @*Balance*@
+                <div class="form-group">
+                    <label>BALANCE:</label>
+                    <InputNumber @bind-Value="persona.Balance" readonly="true" class="form-control" />
+                    <ValidationMessage For="@(() => persona.Balance)" />
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="form-group text-center" display: inline-block>
+                <button type="button" class="btn btn-lg btn-primary" @onclick="Nuevo"><span class="fa fa-plus"></span> Nuevo </button>
+                <button type="submit" class="btn btn-lg btn-success"><span class="fa fa-save"></span> Guardar </button>
+                <button type="button" class="btn btn-lg btn-danger" @onclick="Eliminar"><span class="fa fa-trash"></span> Eliminar </button>
+            </div>
+        </div>
+    </div>
+</EditForm>
+
+@code {
+
+    Personas persona = new Personas();
+
+    [Parameter]
+    public int PersonaId { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Nuevo();
+        if (PersonaId > 0)
+        {
+            persona = PersonasBLL.Buscar(PersonaId);
+        }
+    }
+
+    private void Nuevo()
+    {
+        this.persona = new Personas();
+    }
+
+    private void Guardar()
+    {
+        bool paso;
+        paso = PersonasBLL.Guardar(persona);
+
+        if (paso)
+        {
+            Nuevo();
+            toast.ShowSuccess("Guardado Correctamente");
+        }
+        else
+        {
+            toast.ShowError("No fue posible guardar");
+        }
+    }
+
+    private void Buscar()
+    {
+        var encontrado = PersonasBLL.Buscar(persona.PersonaId);
+        if (encontrado != null)
+        {
+            this.persona = encontrado;
+        }
+        else
+        {
+            toast.ShowWarning("No encontrado");
+        }
+    }
+
+    private void Eliminar()
+    {
+        bool eliminar;
+
+        eliminar = PersonasBLL.Eliminar(persona.PersonaId);
+
+        if (eliminar)
+        {
+            Nuevo();
+            toast.ShowSuccess("Eliminado Correctamente");
+        }
+        else
+        {
+            toast.ShowError("No fue posible eliminar");
+        }
+    }
+
+}
