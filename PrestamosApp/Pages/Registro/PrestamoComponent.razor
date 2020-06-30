@@ -1,14 +1,15 @@
 ﻿@page "/Prestamo";
 @page "/Prestamo/{ID:int}"
 
-@using PrestamosApp.BLL;
-@using PrestamosApp.Models;
+@using PrestamosApp.BLL
+@using PrestamosApp.Models
+
 
 @inject IToastService toast
-@inject HttpClient httpClient
+@inject HttpClient client
 
 
-<EditForm Model="prestamos" OnValidSubmit="Guardar">
+<EditForm Model="prestamos" OnValidSubmit="Post">
     <DataAnnotationsValidator />
 
     <div class="card">
@@ -87,7 +88,7 @@
 
 @code {
 
-    private Prestamos prestamos { get; set; } = new Prestamos();
+    private Prestamos prestamos = new Prestamos();
 
     [Parameter]
     public int ID { get; set; }
@@ -168,17 +169,15 @@
     }
 
 
+    private async Task Post()
+    {
+      
+        client.BaseAddress = new Uri("https://localhost:44379");
+        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
+        var data = System.Text.Json.JsonSerializer.Serialize(prestamos);
+        await client.PostAsync("api/prestamos", new StringContent(data));
 
-    //private async Task Post()
-    //{
-
-    //    //HttpClient client = new HttpClient();
-
-    //    //client.BaseAddress = new Uri("https://localhost:44379");
-    //    //client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
-    //    //HttpResponseMessage response = await client.GetAsync("api/prestamos",prestamos);
-    //}
+    }
 
 }
