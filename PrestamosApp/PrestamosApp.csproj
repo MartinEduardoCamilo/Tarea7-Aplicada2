@@ -6,6 +6,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\Prestamos.db" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Data\Prestamos.db">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Blazored.Toast" Version="3.1.2" />
     <PackageReference Include="microsoft.entityframeworkcore" Version="3.1.5" />
     <PackageReference Include="microsoft.entityframeworkcore.sqlite" Version="3.1.5" />

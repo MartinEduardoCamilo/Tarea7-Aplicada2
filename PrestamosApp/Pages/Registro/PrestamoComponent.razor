@@ -4,12 +4,11 @@
 @using PrestamosApp.BLL
 @using PrestamosApp.Models
 
-
 @inject IToastService toast
 @inject HttpClient client
 
 
-<EditForm Model="prestamos" OnValidSubmit="Post">
+<EditForm Model="prestamos" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
 
     <div class="card">
@@ -171,13 +170,13 @@
 
     private async Task Post()
     {
-      
+
+        HttpClient client = new HttpClient();
+
         client.BaseAddress = new Uri("https://localhost:44379");
         client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
         var data = System.Text.Json.JsonSerializer.Serialize(prestamos);
-        await client.PostAsync("api/prestamos", new StringContent(data));
-
+        HttpResponseMessage response = await client.PostAsync("api/prestamos",new StringContent(data));
     }
 
 }

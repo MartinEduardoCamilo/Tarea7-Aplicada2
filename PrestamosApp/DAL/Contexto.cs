@@ -13,7 +13,7 @@ namespace PrestamosApp.DAL
         public DbSet<Prestamos> Prestamos { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data Source=C:\Users\hp\source\repos\Prestmos\Prestamos.db");
+            optionsBuilder.UseSqlite(@"Data Source=Data\Prestamos.db");
         }
 
     }
